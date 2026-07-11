@@ -16,7 +16,7 @@
       ],
       "color" : {
         "platform" : "osx",
-        "reference" : "keyboardFocusIndicatorColor"
+        "reference" : "controlTextColor"
       },
       "idiom" : "universal"
     }
