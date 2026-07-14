@@ -1,0 +1,23 @@
+//
+//  .gitignore
+//  GithubClient
+//
+//  Created by Usuario invitado on 14/7/26.
+//
+
+# --- Xcode e iOS ---
+build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+.DS_Store
+
+# --- Swift Package Manager ---
+.build/
+.swiftpm/
+
+# --- Configuración Sensible ---
+# Esto ignora el archivo config (ya sea config.swift, config.json, config.plist, etc.) 
+# que se encuentra dentro de la carpeta Resources de tu GithubClient.
+**/GithubClient/Resources/config*
+**/config.plist
