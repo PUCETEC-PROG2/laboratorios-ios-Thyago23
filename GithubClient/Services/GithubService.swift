@@ -11,7 +11,7 @@ class GithubService {
     static let shared = GithubService()
     private let baseUrl = "https://api.github.com"
     private var token: String {
-        let envToken = ProcessInfo.processInfo.environment["GITHUB_TOKEN"] ?? ""
+        let envToken = ProcessInfo.processInfo.environment["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"] ?? ""
         if !envToken.isEmpty {
             return envToken
         }
