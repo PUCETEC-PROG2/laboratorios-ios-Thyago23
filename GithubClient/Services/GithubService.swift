@@ -10,7 +10,13 @@ import Alamofire
 class GithubService {
     static let shared = GithubService()
     private let baseUrl = "https://api.github.com"
-    private var token: String { ProcessInfo.processInfo.environment["GITHUB_TOKEN"] ?? "" }
+    private var token: String {
+        let envToken = ProcessInfo.processInfo.environment["GITHUB_TOKEN"] ?? ""
+        if !envToken.isEmpty {
+            return envToken
+        }
+        return AppConfig.apiToken
+    }
 
     private init() {}
 
