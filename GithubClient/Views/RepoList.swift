@@ -2,8 +2,6 @@
 //  RepoList.swift
 //  GithubClient
 //
-//  Created by Bryan Taco on 7/7/26.
-//
 
 import SwiftUI
 

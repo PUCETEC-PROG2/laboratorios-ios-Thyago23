@@ -2,7 +2,6 @@
 //  RepoItem.swift
 //  GithubClient
 //
-//  Created by Bryan Taco on 7/7/26.
 //
 
 import SwiftUI
@@ -83,10 +82,10 @@ struct RepoItem: View {
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             language: "Swift",
             owner: UserInfo(
-                login: "bryantaco",
-                name: "Bryan Taco",
+                login: "Thyago23",
+                name: "Santiago Cedeño",
                 avatarUrl: "",
-                bio: "Esta es una Bio de Prueba"
+                bio: "Esta es una Bio de Prueba para ios"
             )
         ),
         onEdit: { print("Editar") },

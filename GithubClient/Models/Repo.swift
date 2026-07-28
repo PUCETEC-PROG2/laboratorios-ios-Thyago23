@@ -2,7 +2,6 @@
 //  Repo.swift
 //  GithubClient
 //
-//  Created by Bryan Taco on 14/7/26.
 //
 
 import Foundation

@@ -2,7 +2,6 @@
 //  RepoListViewController.swift
 //  GithubClient
 //
-//  Created by Bryan Taco on 7/14/26.
 //
 
 import Foundation

@@ -2,7 +2,6 @@
 //  RepoFormViewController.swift
 //  GithubClient
 //
-//  Created by Bryan Taco on 7/21/26.
 //
 
 import Foundation
