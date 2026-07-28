@@ -10,14 +10,27 @@ import Alamofire
 
 class GithubService {
     static let shared = GithubService()
-    private let baseUrl = AppConfig.apiBaseUrl
+    private let baseUrl = "https://api.github.com"
+    private var token: String { ProcessInfo.processInfo.environment["GITHUB_TOKEN"] ?? "" }
 
     private init() {}
 
     private var headers: HTTPHeaders {
         [
-            "Authorization": "Bearer \(AppConfig.apiToken)"
+            "Authorization": "token \(token)",
+            "Accept": "application/vnd.github.v3+json"
         ]
+    }
+
+    func getUser() async throws -> UserInfo {
+        return try await AF.request(
+            "\(baseUrl)/user",
+            method: .get,
+            headers: headers
+        )
+        .validate(statusCode: 200..<300)
+        .serializingDecodable(UserInfo.self)
+        .value
     }
 
     func getRepositories() async throws -> [Repo] {
