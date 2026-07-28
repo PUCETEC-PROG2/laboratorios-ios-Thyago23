@@ -1,16 +1,17 @@
 //
-//  Repository.swift
+//  Repo.swift
 //  GithubClient
 //
-//  Created by Usuario invitado on 14/7/26.
+//  Created by Bryan Taco on 14/7/26.
 //
 
 import Foundation
 
-struct Repository: Identifiable, Decodable {
+struct Repo: Identifiable, Decodable {
     let id: Int
     let name: String
     let description: String?
     let language: String?
     let owner: UserInfo
 }
+

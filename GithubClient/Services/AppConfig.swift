@@ -2,21 +2,24 @@
 //  AppConfig.swift
 //  GithubClient
 //
-//  Created by Usuario invitado on 14/7/26.
+//  Created by Bryan Taco on 7/14/26.
 //
+
 import Foundation
 
 enum AppConfig {
-    private static let filname = "config"
-    
+    private static let filename = "config"
+
     private enum Keys {
-        static let apiBaseURL = "API_BASE_URL"
-        static let apiToken = "API_TOKEN" // 
+        static let apiBaseUrl = "API_BASE_URL"
+        static let apiToken = "API_TOKEN"
     }
-    
-    private static var config: [String: Any]? = {
+
+    private static var config: [String: Any] {
         guard
-            let url = Bundle.main.url(forResource: filname, withExtension: "plist"),
+            let url = Bundle.main.url(
+                forResource: filename, withExtension: "plist"
+            ),
             let data = try? Data(contentsOf: url),
             let plist = try? PropertyListSerialization.propertyList(
                 from: data,
@@ -24,23 +27,26 @@ enum AppConfig {
                 format: nil
             ),
             let dict = plist as? [String: Any]
+
         else {
-            return nil
+            fatalError("Unable to load \(filename).plist")
+
         }
+
         return dict
-    }()
-    
-    static var apiBaseURL: String {
-        guard let config = config, let value = config[Keys.apiBaseURL] as? String else {
-            return "https://api.github.com"
-        }
-        return value
     }
-    
-    static var apiToken: String {
-        guard let config = config, let value = config[Keys.apiToken] as? String else {
-            return ""
+
+    static var apiBaseUrl: String {
+        guard let url = config[Keys.apiBaseUrl] as? String else {
+            fatalError("No se pudo obtener la URL base de la api")
         }
-        return value
+        return url
+    }
+
+    static var apiToken: String {
+        guard let token = config[Keys.apiToken] as? String else {
+            fatalError("No se pudo obtener el token de la api")
+        }
+        return token
     }
 }

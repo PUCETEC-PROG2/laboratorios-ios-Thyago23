@@ -2,32 +2,64 @@
 //  RepoList.swift
 //  GithubClient
 //
-//  Created by Usuario invitado on 7/7/26.
+//  Created by Bryan Taco on 7/7/26.
 //
+
 import SwiftUI
 
 struct RepoList: View {
-    @StateObject private var viewController = RepoListViewController()
-    
+    @StateObject private var controller = RepoListViewController()
+    @State private var repoToEdit: Repo? = nil
+
     var body: some View {
         NavigationStack {
             Group {
-                if viewController.isLoading {
+                if controller.isLoading {
                     ProgressView("Cargando repositorios...")
-                } else if let errorMsg = viewController.errorMsg {
-                    Text(errorMsg)
-                        .foregroundStyle(.red)
-                        .padding()
+                } else if let errorMsg = controller.errorMsg {
+                    VStack(spacing: 12) {
+                        Image(systemName: "exclamationmark.triangle")
+                            .font(.largeTitle)
+                            .foregroundStyle(.red)
+                        Text(errorMsg)
+                            .multilineTextAlignment(.center)
+                        Button("Reintentar") {
+                            Task {
+                                await controller.loadRepositories()
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                    .padding()
                 } else {
-                    List(viewController.repositories) { repo in
-                        RepoItem(repository: repo)
+                    List(controller.repos) { repo in
+                        RepoItem(
+                            repos: repo,
+                            onEdit: {
+                                repoToEdit = repo
+                            },
+                            onDelete: {
+                                Task {
+                                    await controller.deleteRepository(repo: repo)
+                                }
+                            }
+                        )
+                    }
+                    .listStyle(.plain)
+                    .refreshable {
+                        await controller.loadRepositories()
                     }
                 }
             }
             .navigationTitle("Repositorios")
-            .onAppear {
-                Task {
-                    await viewController.loadRepositories()
+            .task {
+                await controller.loadRepositories()
+            }
+            .sheet(item: $repoToEdit) { repo in
+                RepoEditForm(repo: repo) {
+                    Task {
+                        await controller.loadRepositories()
+                    }
                 }
             }
         }

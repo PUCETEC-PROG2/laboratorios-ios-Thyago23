@@ -2,9 +2,8 @@
 //  UserInfo.swift
 //  GithubClient
 //
-//  Created by Usuario invitado on 14/7/26.
+//  Created by Bryan Taco on 7/14/26.
 //
-
 import Foundation
 
 struct UserInfo: Decodable {
@@ -18,6 +17,7 @@ struct UserInfo: Decodable {
         case name
         case avatarUrl = "avatar_url"
         case bio
+    
     }
+    
 }
-
